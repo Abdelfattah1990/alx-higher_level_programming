@@ -6,6 +6,7 @@ if number < 0:
     last_digit = -1 * (abs_value % 10)
 else:
     last_digit = abs_value % 10
+
 if last_digit > 5:
     message = "is greater than 5"
 elif last_digit == 0:
