@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "lists.h"
 
 
@@ -43,6 +42,7 @@ listint_t *new;
 listint_t *current;
 current = *head;
 new = malloc(sizeof(listint_t));
+
 if (new == NULL)
 
 return (NULL);
