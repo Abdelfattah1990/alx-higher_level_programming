@@ -1,30 +1,31 @@
 #!/usr/bin/python3
 
-
 def roman_to_int(roman_string):
-    """Converts a roman numeral to an integer."""
-    if (not isinstance(roman_string, str) or
-            roman_string is None):
-        return (0)
-
-    roman_dict = {
-            "I": 1,
-            "V": 5,
-            "X": 10,
-            "L": 50,                                                                        "C": 100,
-            "D": 500,
-            "M": 1000
-    }
-    num = 0
-
-    for i in range(len(roman_string)):
-        if roman_dict.get(roman_string[i], 0) == 0:
-            return (0)
-
-        if (i != (len(roman_string) - 1) and
-                roman_dict[roman_string[i]] < roman_dict[roman_string[i + 1]]):
-                num += roman_dict[roman_string[i]] * -1
-        
-        else:
-            num += roman_dict[roman_string[i]]
-    return (num)
+    if roman_string is not None and type(roman_string) is str:
+        symbols = ('I', 'V', 'X', 'L', 'C', 'D', 'M')
+        values = (1, 5, 10, 50, 100, 500, 1000)
+        strlen = len(roman_string)
+        number = 0
+        i = 0
+        while i < strlen:
+            j = 0
+            while j < len(symbols):
+                if roman_string[i] == symbols[j]:
+                    if j % 2 == 0 and j != 6:
+                        value = values[j]
+                        if (i+1) < strlen:
+                            if roman_string[i+1] == symbols[j+1]:
+                                value = values[j+1] - value
+                                i += 1
+                            elif roman_string[i+1] == symbols[j+2]:
+                                value = values[j+2] - value
+                                i += 1
+                        number += value
+                    else:
+                        number += values[j]
+                    break
+                j += 1
+            i += 1
+        return number
+    else:
+        return 0
